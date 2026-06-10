@@ -320,10 +320,15 @@ function sbFetch(path, opts) {
     'apikey': SB_KEY,
     'Authorization': 'Bearer ' + SB_KEY,
     'Content-Type': 'application/json',
-    'Prefer': 'return=representation'
+    'Prefer': 'return=minimal'
   };
-  if (opts && opts.headers) Object.assign(headers, opts.headers);
-  return fetch(url, Object.assign({headers: headers}, opts || {}));
+  if (opts && opts.headers) {
+    Object.assign(headers, opts.headers);
+    delete opts.headers;
+  }
+  var fetchOpts = Object.assign({}, opts || {});
+  fetchOpts.headers = headers;
+  return fetch(url, fetchOpts);
 }
 
 // ============ MEMBERS (hardcoded) ============
@@ -534,7 +539,8 @@ function renderMarkGrid() {
   }).join('');
 }
 
-function qToggle(name, d, alreadyDone) {
+function qToggle(name, d) {
+  var alreadyDone = isDone(name, d);
   if(alreadyDone){
     deleteLog(name, d).then(function(){
       toast('&#x274C; '+name+' unmarked');
@@ -550,7 +556,8 @@ function qToggle(name, d, alreadyDone) {
   }
 }
 
-function adminToggle(name, d, alreadyDone) {
+function adminToggle(name, d) {
+  var alreadyDone = isDone(name, d);
   if(alreadyDone){
     deleteLog(name,d).then(function(){
       toast('&#x274C; '+name+' unmarked');
