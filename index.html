@@ -8,69 +8,48 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --bg:#080b12;--card:#161d2e;--surface:#0f1420;--border:#232d44;
-  --accent:#00e5ff;--purple:#a855f7;--green:#00e676;--gold:#ffd700;
-  --orange:#ff6d3a;--text:#e8edf8;--muted:#5a6a8a;
-}
+:root{--bg:#080b12;--card:#161d2e;--surface:#0f1420;--border:#232d44;--accent:#00e5ff;--purple:#a855f7;--green:#00e676;--gold:#ffd700;--orange:#ff6d3a;--text:#e8edf8;--muted:#5a6a8a;}
 body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;}
 .wrap{max-width:860px;margin:0 auto;padding:20px 16px 80px;}
-/* HEADER */
 .hdr{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:26px;flex-wrap:wrap;gap:8px;}
 .logo{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:4px;background:linear-gradient(90deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .logo-sub{font-size:.68rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
 .hdr-right{text-align:right;font-size:.72rem;color:var(--accent);font-weight:600;}
-.hdr-date{color:var(--muted);margin-top:3px;}
-/* SCREEN */
 .scr{display:none;}.scr.on{display:block;}
-/* CARD */
 .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 24px;position:relative;overflow:hidden;}
 .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--purple));}
-/* FORM */
 .lbl{font-size:.7rem;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:6px;}
 input[type=text],input[type=password]{width:100%;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:13px 14px;color:var(--text);font-size:1rem;font-family:'Plus Jakarta Sans',sans-serif;outline:none;margin-bottom:14px;}
 input:focus{border-color:var(--accent);}
-/* BUTTONS */
 .btn{display:block;width:100%;padding:14px;border:none;border-radius:10px;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1.5px;cursor:pointer;margin-bottom:10px;text-align:center;}
 .btn-main{background:linear-gradient(135deg,var(--accent),var(--purple));color:#080b12;}
 .btn-sub{background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.3);color:var(--accent);}
 .btn-out{background:transparent;border:1.5px solid var(--border);color:var(--muted);}
 .btn-ghost{background:var(--border);color:var(--text);}
-/* ERR */
 .err{background:rgba(255,109,58,.12);border:1px solid rgba(255,109,58,.4);color:var(--orange);border-radius:8px;padding:10px 14px;font-size:.83rem;margin-bottom:12px;display:none;}
-/* USER BAR */
 .ubar{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;margin-bottom:20px;flex-wrap:wrap;gap:8px;}
-.ubar-name{font-weight:700;font-size:1rem;}
-.ubar-sub{font-size:.74rem;color:var(--muted);}
 .streak{background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);color:var(--gold);border-radius:100px;padding:5px 12px;font-size:.8rem;font-weight:700;}
 .logout{background:none;border:1px solid var(--border);color:var(--muted);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.78rem;}
-/* CHALLENGE */
 .ch-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:20px;position:relative;overflow:hidden;}
 .ch-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--green),var(--purple));}
 .ch-tag{font-size:.68rem;font-weight:700;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;}
 .ch-title{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:1px;margin-bottom:5px;}
 .ch-desc{color:var(--muted);font-size:.86rem;line-height:1.6;}
-/* MARK BTN */
 .mark-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;border-radius:12px;border:2px solid var(--border);background:var(--surface);color:var(--text);font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:1.5px;cursor:pointer;margin-top:18px;transition:all .2s;}
 .mark-btn:hover{border-color:var(--green);color:var(--green);}
 .done-box{text-align:center;padding:14px;background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.25);border-radius:10px;color:var(--green);font-weight:700;margin-top:18px;}
 .yest-row{margin-top:10px;padding:12px 14px;background:var(--surface);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
 .yest-btn{background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.25);color:var(--accent);padding:6px 12px;border-radius:8px;cursor:pointer;font-size:.78rem;font-weight:700;font-family:'Bebas Neue',sans-serif;letter-spacing:1px;}
-/* TABS */
 .vtabs{display:flex;gap:4px;background:var(--card);border:1px solid var(--border);padding:4px;border-radius:12px;margin-bottom:16px;}
 .vtab{flex:1;padding:8px 2px;border-radius:8px;border:none;background:none;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:.75rem;cursor:pointer;}
 .vtab.on{background:linear-gradient(135deg,var(--accent),var(--purple));color:#080b12;}
-/* TOP BANNER */
 .top-banner{background:linear-gradient(135deg,rgba(255,215,0,.1),rgba(255,215,0,.03));border:1px solid rgba(255,215,0,.25);border-radius:14px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
 .top-banner strong{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;color:var(--gold);}
-.top-banner span{font-size:.76rem;color:var(--muted);}
-/* BOARD HEADER */
 .bh{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;}
 .bh-title{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1.5px;color:var(--muted);}
 .bh-btns{display:flex;gap:6px;}
-.wa-btn{background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;border:none;padding:8px 14px;border-radius:10px;font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:1px;cursor:pointer;display:flex;align-items:center;gap:6px;}
+.wa-btn{background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;border:none;padding:8px 14px;border-radius:10px;font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:1px;cursor:pointer;}
 .chart-btn{background:linear-gradient(135deg,var(--purple),var(--accent));color:#fff;border:none;padding:8px 14px;border-radius:10px;font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:1px;cursor:pointer;}
-/* MEMBER CARD */
 .mcard{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:15px 16px;margin-bottom:10px;}
 .mcard.gold{border-color:rgba(255,215,0,.4);background:linear-gradient(135deg,rgba(255,215,0,.05),var(--card));}
 .mcard.silver{border-color:rgba(192,200,216,.2);}
@@ -89,12 +68,10 @@ input:focus{border-color:var(--accent);}
 .dots{display:flex;gap:4px;}
 .dot{width:10px;height:10px;border-radius:3px;}
 .dot.on{background:var(--green);}.dot.off{background:var(--border);}
-/* ADMIN TABS */
 .atabs{display:flex;gap:4px;background:var(--card);border:1px solid var(--border);padding:4px;border-radius:12px;margin-bottom:20px;}
 .atab{flex:1;padding:9px;border-radius:8px;border:none;background:none;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:.78rem;cursor:pointer;}
 .atab.on{background:linear-gradient(135deg,var(--accent),var(--purple));color:#080b12;}
 .apanel{display:none;}.apanel.on{display:block;}
-/* MARK GRID */
 .mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-bottom:16px;}
 .mgtile{border-radius:14px;padding:14px 10px;text-align:center;cursor:pointer;border:2px solid var(--border);background:var(--card);transition:all .2s;}
 .mgtile.done{background:linear-gradient(135deg,rgba(0,230,118,.15),rgba(0,188,212,.1));border-color:rgba(0,230,118,.5);}
@@ -104,9 +81,8 @@ input:focus{border-color:var(--accent);}
 .mgtile-st{font-size:.66rem;font-weight:700;color:var(--muted);}
 .mgtile.done .mgtile-st{color:var(--green);}
 .mdt{display:flex;gap:4px;background:var(--surface);border:1px solid var(--border);padding:3px;border-radius:8px;margin-bottom:10px;width:fit-content;}
-.mdtbtn{padding:5px 14px;border-radius:6px;border:none;background:none;color:var(--muted);font-size:.74rem;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;}
+.mdtbtn{padding:5px 14px;border-radius:6px;border:none;background:none;color:var(--muted);font-size:.74rem;font-weight:700;cursor:pointer;}
 .mdtbtn.on{background:var(--accent);color:#080b12;}
-/* MEMBER TABLE */
 .mtbl{width:100%;border-collapse:collapse;}
 .mtbl th{text-align:left;padding:10px 12px;font-size:.68rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);border-bottom:1px solid var(--border);}
 .mtbl td{padding:11px 12px;border-bottom:1px solid var(--border);font-size:.86rem;}
@@ -115,22 +91,18 @@ input:focus{border-color:var(--accent);}
 .row{display:flex;gap:10px;flex-wrap:wrap;}
 .row .field{flex:1;min-width:120px;}
 .row .field input{margin-bottom:0;}
-/* CHART MODAL */
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;align-items:center;justify-content:center;padding:16px;}
 .modal.on{display:flex;}
 .modal-box{background:#fff;border-radius:20px;padding:24px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;}
 .modal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
 .modal-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;background:linear-gradient(90deg,#7C3AED,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.modal-close{background:none;border:none;font-size:1.4rem;cursor:pointer;color:#666;padding:4px 10px;border-radius:8px;}
+.modal-close{background:none;border:none;font-size:1.4rem;cursor:pointer;color:#666;}
 .cvtabs{display:flex;gap:5px;margin-bottom:14px;}
 .cvtab{flex:1;padding:7px 4px;border-radius:8px;border:1.5px solid #e5e7eb;background:#fff;color:#888;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:.73rem;cursor:pointer;text-align:center;}
 .cvtab.on{background:linear-gradient(135deg,#7C3AED,#06B6D4);color:#fff;border-color:transparent;}
-/* SHARE CARD */
 .scard{background:#fff;border-radius:16px;overflow:hidden;border:1px solid #eee;}
 .scard-hdr{background:linear-gradient(135deg,#7C3AED,#06B6D4);padding:18px 20px;color:#fff;}
 .scard-brand{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:3px;}
-.scard-sub{font-size:.7rem;opacity:.85;letter-spacing:1px;margin-top:2px;}
-.scard-date{font-size:.68rem;opacity:.75;margin-top:5px;}
 .scard-body{padding:16px 18px;}
 .scard-lbl{font-size:.65rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;}
 .smrow{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
@@ -150,15 +122,14 @@ input:focus{border-color:var(--accent);}
 .btn-dl{background:linear-gradient(135deg,#7C3AED,#06B6D4);color:#fff;}
 .btn-wa2{background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;}
 .btn-cls{background:#f0f0f0;color:#555;}
-/* TOAST */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--green);color:#051208;padding:11px 22px;border-radius:100px;font-weight:700;font-size:.88rem;z-index:9999;transition:transform .4s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;pointer-events:none;}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--green);color:#051208;padding:11px 22px;border-radius:100px;font-weight:700;font-size:.88rem;z-index:9999;transition:transform .4s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;}
 .toast.on{transform:translateX(-50%) translateY(0);}
-/* ADMIN MARK BTNS */
 .abtn{border:none;padding:6px 12px;border-radius:8px;cursor:pointer;font-family:'Bebas Neue',sans-serif;font-size:.78rem;letter-spacing:1px;margin-right:5px;margin-top:6px;}
 .abtn-do{background:linear-gradient(135deg,var(--accent),var(--purple));color:#080b12;}
 .abtn-ye{background:var(--surface);color:var(--accent);border:1px solid rgba(0,229,255,.25);}
 .abtn-un{background:none;color:var(--orange);border:1px solid rgba(255,109,58,.2);}
-/* RESPONSIVE */
+.loading{text-align:center;padding:40px;color:var(--muted);font-size:.9rem;}
+.sync-indicator{position:fixed;top:12px;right:12px;background:rgba(0,230,118,.15);border:1px solid rgba(0,230,118,.3);color:var(--green);padding:4px 12px;border-radius:100px;font-size:.7rem;font-weight:700;z-index:999;display:none;}
 @media(max-width:580px){
   .wrap{padding:14px 12px 80px;}
   .logo{font-size:1.8rem;}
@@ -167,26 +138,22 @@ input:focus{border-color:var(--accent);}
   .mgrid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr));}
   .row{flex-direction:column;}
   .bh-btns{gap:4px;}
-  .wa-btn,.chart-btn{font-size:.76rem;padding:7px 10px;}
 }
 </style>
 </head>
 <body>
+<div class="sync-indicator" id="syncInd">⚡ Syncing...</div>
 <div class="wrap">
 
-<!-- HEADER -->
 <div class="hdr">
   <div>
     <div class="logo">LEAP</div>
     <div class="logo-sub">Daily Exercise Challenge &middot; Est. Mar 26</div>
   </div>
-  <div class="hdr-right">
-    &#9200; Every Friday 7:30 AM
-    <div class="hdr-date" id="hdDate"></div>
-  </div>
+  <div class="hdr-right">&#9200; Every Friday 7:30 AM<div style="color:var(--muted);margin-top:3px;" id="hdDate"></div></div>
 </div>
 
-<!-- ===== LOGIN ===== -->
+<!-- LOGIN -->
 <div class="scr on" id="sLogin">
   <div style="max-width:420px;margin:0 auto;">
     <div class="card">
@@ -194,7 +161,7 @@ input:focus{border-color:var(--accent);}
       <p style="color:var(--muted);font-size:.84rem;margin-bottom:22px;line-height:1.5;">Enter your name and PIN to mark today's challenge.</p>
       <div class="err" id="loginErr"></div>
       <label class="lbl">Your Name</label>
-      <input type="text" id="inName" placeholder="Type your name e.g. MUNEES" autocapitalize="characters">
+      <input type="text" id="inName" placeholder="Type your name..." autocapitalize="characters">
       <label class="lbl">PIN (4 digits)</label>
       <input type="password" id="inPin" maxlength="4" placeholder="&#9679;&#9679;&#9679;&#9679;" inputmode="numeric">
       <button class="btn btn-main" id="btnGo">LET'S GO &rarr;</button>
@@ -204,7 +171,7 @@ input:focus{border-color:var(--accent);}
   </div>
 </div>
 
-<!-- ===== ADMIN PASSWORD ===== -->
+<!-- ADMIN PW -->
 <div class="scr" id="sAdminPw">
   <div style="max-width:420px;margin:0 auto;">
     <div class="card">
@@ -219,12 +186,12 @@ input:focus{border-color:var(--accent);}
   </div>
 </div>
 
-<!-- ===== MEMBER ===== -->
+<!-- MEMBER -->
 <div class="scr" id="sMember">
   <div class="ubar">
     <div>
-      <div class="ubar-name" id="mName"></div>
-      <div class="ubar-sub">Ready to LEAP today? &#x1F3C3;</div>
+      <div style="font-weight:700;font-size:1rem;" id="mName"></div>
+      <div style="font-size:.74rem;color:var(--muted);">Ready to LEAP today? &#x1F3C3;</div>
     </div>
     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
       <div class="streak" id="mStreak">&#x1F525; 0 streak</div>
@@ -248,23 +215,19 @@ input:focus{border-color:var(--accent);}
     <div class="bh-title" id="mBoardTitle">TODAY'S LEADERBOARD</div>
     <div class="bh-btns">
       <button class="chart-btn" id="btnChart">&#x1F4CA; CHART</button>
-      <button class="wa-btn" id="btnWA">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.989.574 3.842 1.566 5.408L2 22l4.72-1.538A9.953 9.953 0 0011.999 22C17.522 22 22 17.523 22 12S17.522 2 11.999 2zm0 18.182a8.165 8.165 0 01-4.17-1.144l-.299-.178-3.1 1.009 1.04-3.002-.196-.308A8.153 8.153 0 013.818 12c0-4.512 3.671-8.182 8.181-8.182S20.182 7.488 20.182 12c0 4.513-3.671 8.182-8.183 8.182z"/></svg>
-        SHARE
-      </button>
+      <button class="wa-btn" id="btnWA">&#x1F4F1; SHARE</button>
     </div>
   </div>
   <div id="mBoard"></div>
 </div>
 
-<!-- ===== ADMIN ===== -->
+<!-- ADMIN -->
 <div class="scr" id="sAdmin">
   <div class="atabs" id="aTabs">
     <button class="atab on" data-t="aToday">Today</button>
     <button class="atab" data-t="aMembers">Members</button>
     <button class="atab" data-t="aStats">Stats</button>
   </div>
-  <!-- TODAY -->
   <div class="apanel on" id="aToday">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
       <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1.5px;color:var(--muted);">&#x26A1; QUICK MARK</div>
@@ -287,7 +250,6 @@ input:focus{border-color:var(--accent);}
     <div class="top-banner" id="aTopBanner"></div>
     <div id="aBoard"></div>
   </div>
-  <!-- MEMBERS -->
   <div class="apanel" id="aMembers">
     <div class="add-form">
       <h4>&#x2795; Add Member</h4>
@@ -298,29 +260,21 @@ input:focus{border-color:var(--accent);}
       <button class="btn btn-main" id="btnAddM" style="margin-top:10px;">ADD MEMBER</button>
       <div class="err" id="addErr">Name exists or invalid PIN.</div>
     </div>
-    <table class="mtbl" id="mTbl">
-      <thead><tr><th>#</th><th>Name</th><th>PIN</th><th>Streak</th><th>Total</th><th></th></tr></thead>
-      <tbody id="mTblBody"></tbody>
-    </table>
+    <table class="mtbl"><thead><tr><th>#</th><th>Name</th><th>PIN</th><th>Streak</th><th>Total</th></tr></thead>
+    <tbody id="mTblBody"></tbody></table>
   </div>
-  <!-- STATS -->
-  <div class="apanel" id="aStats">
-    <div id="statsDiv"></div>
-  </div>
+  <div class="apanel" id="aStats"><div id="statsDiv"></div></div>
 </div>
 
-<!-- ===== PUBLIC BOARD ===== -->
+<!-- PUBLIC -->
 <div class="scr" id="sPublic">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px;">
     <div>
       <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;color:var(--gold);">&#x1F3C6; ALL-TIME LEADERBOARD</div>
-      <div style="font-size:.72rem;color:var(--muted);margin-top:2px;">Since Mar 26 &mdash; No login required</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:2px;">Since Mar 26</div>
     </div>
     <div style="display:flex;gap:8px;">
-      <button class="wa-btn" id="btnPubWA">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.989.574 3.842 1.566 5.408L2 22l4.72-1.538A9.953 9.953 0 0011.999 22C17.522 22 22 17.523 22 12S17.522 2 11.999 2zm0 18.182a8.165 8.165 0 01-4.17-1.144l-.299-.178-3.1 1.009 1.04-3.002-.196-.308A8.153 8.153 0 013.818 12c0-4.512 3.671-8.182 8.181-8.182S20.182 7.488 20.182 12c0 4.513-3.671 8.182-8.183 8.182z"/></svg>
-        SHARE
-      </button>
+      <button class="wa-btn" id="btnPubWA">&#x1F4F1; SHARE</button>
       <button class="btn btn-out" id="btnPubBack" style="padding:8px 16px;margin:0;width:auto;font-size:.78rem;">&larr; Back</button>
     </div>
   </div>
@@ -350,16 +304,32 @@ input:focus{border-color:var(--accent);}
   </div>
 </div>
 
-</div><!-- /wrap -->
+</div>
 <div class="toast" id="toast"></div>
 
 <script>
-// ===================== DATA =====================
+// ============ SUPABASE CONFIG ============
+var SB_URL = 'https://mxqmlkxrdzngzubgfzow.supabase.co';
+var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im14cW1sa3hyZHpuZ3p1Ymdmem93Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwNDU3NzEsImV4cCI6MjA5NjYyMTc3MX0.czWknsNuS__X3C_GT-V_hV8rmqbm2ewnHIw9tAA5jKo';
+
+function sbFetch(path, opts) {
+  var url = SB_URL + '/rest/v1/' + path;
+  var headers = {
+    'apikey': SB_KEY,
+    'Authorization': 'Bearer ' + SB_KEY,
+    'Content-Type': 'application/json',
+    'Prefer': 'return=representation'
+  };
+  if (opts && opts.headers) Object.assign(headers, opts.headers);
+  return fetch(url, Object.assign({headers: headers}, opts || {}));
+}
+
+// ============ MEMBERS (hardcoded) ============
 var PASS = 'admin1234';
 var START = '2026-03-26';
 var TODAY = new Date().toISOString().split('T')[0];
 
-var DEFAULTS = [
+var MEMBERS = [
   {name:'MUNEES',   pin:'9876'},
   {name:'MUHAMMED', pin:'0819'},
   {name:'SHAHITHA', pin:'5267'},
@@ -372,40 +342,8 @@ var DEFAULTS = [
   {name:'NASEERA',  pin:'7488'}
 ];
 
-function loadMembers() {
-  var members = DEFAULTS.map(function(d){ return {name:d.name, pin:d.pin, logs:[]}; });
-  try {
-    var raw = localStorage.getItem('leap_members');
-    if (raw) {
-      var saved = JSON.parse(raw);
-      if (Array.isArray(saved) && saved.length > 0) {
-        // merge logs from saved, but keep hardcoded pins as authority
-        members = members.map(function(def) {
-          var found = null;
-          for (var i = 0; i < saved.length; i++) {
-            if (saved[i].name.toUpperCase() === def.name.toUpperCase()) { found = saved[i]; break; }
-          }
-          return { name: def.name, pin: def.pin, logs: (found && found.logs) ? found.logs : [] };
-        });
-        // also keep any extra members added via admin
-        for (var i = 0; i < saved.length; i++) {
-          var isDefault = false;
-          for (var j = 0; j < DEFAULTS.length; j++) {
-            if (DEFAULTS[j].name.toUpperCase() === saved[i].name.toUpperCase()) { isDefault = true; break; }
-          }
-          if (!isDefault) members.push(saved[i]);
-        }
-      }
-    }
-  } catch(e) {}
-  return members;
-}
-
-function saveMembers(m) {
-  try { localStorage.setItem('leap_members', JSON.stringify(m)); } catch(e) {}
-}
-
-var members = loadMembers();
+// logs fetched from Supabase: [{member_name, log_date, done}]
+var allLogs = [];
 var curMember = null;
 var mView = 'daily';
 var aView = 'daily';
@@ -413,7 +351,48 @@ var mDate = 'today';
 var cView = 'daily';
 var COLORS = ['#7C3AED','#06B6D4','#10B981','#F59E0B','#EF4444','#EC4899','#8B5CF6','#14B8A6','#F97316','#6366F1'];
 
-// ===================== HELPERS =====================
+// ============ SUPABASE FUNCTIONS ============
+function fetchLogs() {
+  return sbFetch('logs?select=member_name,log_date,done&order=log_date.asc')
+    .then(function(r){ return r.json(); })
+    .then(function(data){ if(Array.isArray(data)) allLogs = data; })
+    .catch(function(e){ console.log('fetchLogs error:', e); });
+}
+
+function upsertLog(memberName, logDate, doneVal) {
+  showSync(true);
+  return sbFetch('logs', {
+    method: 'POST',
+    headers: {'Prefer': 'resolution=merge-duplicates,return=representation'},
+    body: JSON.stringify({member_name: memberName, log_date: logDate, done: doneVal})
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(){
+    return fetchLogs();
+  })
+  .then(function(){
+    showSync(false);
+  })
+  .catch(function(e){ showSync(false); console.log('upsertLog error:', e); });
+}
+
+function deleteLog(memberName, logDate) {
+  showSync(true);
+  return sbFetch('logs?member_name=eq.'+encodeURIComponent(memberName)+'&log_date=eq.'+logDate, {
+    method: 'DELETE'
+  })
+  .then(function(){
+    return fetchLogs();
+  })
+  .then(function(){ showSync(false); })
+  .catch(function(e){ showSync(false); console.log('deleteLog error:', e); });
+}
+
+function showSync(on) {
+  document.getElementById('syncInd').style.display = on ? 'block' : 'none';
+}
+
+// ============ HELPERS ============
 function qs(id){ return document.getElementById(id); }
 function show(id){ document.querySelectorAll('.scr').forEach(function(s){s.classList.remove('on');}); qs(id).classList.add('on'); }
 function toast(msg){ var t=qs('toast'); t.innerHTML=msg; t.classList.add('on'); setTimeout(function(){t.classList.remove('on');},2600); }
@@ -426,54 +405,74 @@ function dateRange(a,b){
 function yesterday(){ var d=new Date(TODAY); d.setDate(d.getDate()-1); return d.toISOString().split('T')[0]; }
 function wkStart(dt){ var d=new Date(dt); d.setDate(d.getDate()-d.getDay()); return d.toISOString().split('T')[0]; }
 function moStart(dt){ return dt.slice(0,7)+'-01'; }
-function done(m,d){ return m.logs && m.logs.some(function(l){return l.date===d&&l.done;}); }
-function streak(m){ var s=0,d=new Date(TODAY); while(done(m,new Date(d).toISOString().split('T')[0])){s++;d.setDate(d.getDate()-1);} return s; }
-function total(m){ return (m.logs||[]).filter(function(l){return l.done;}).length; }
-function stats(m,v){
+
+function isDone(name, date) {
+  return allLogs.some(function(l){ return l.member_name===name && l.log_date===date && l.done; });
+}
+function calcStreak(name) {
+  var s=0, d=new Date(TODAY);
+  while(isDone(name, new Date(d).toISOString().split('T')[0])){ s++; d.setDate(d.getDate()-1); }
+  return s;
+}
+function totalDone(name) {
+  return allLogs.filter(function(l){ return l.member_name===name && l.done; }).length;
+}
+function getStats(name, v) {
   var from,to;
   if(v==='daily'){from=to=TODAY;}
   else if(v==='weekly'){from=wkStart(TODAY);to=TODAY;}
   else if(v==='monthly'){from=moStart(TODAY);to=TODAY;}
   else{from=START;to=TODAY;}
-  var r=dateRange(from,to), n=r.filter(function(d){return done(m,d);}).length;
+  var r=dateRange(from,to), n=r.filter(function(d){return isDone(name,d);}).length;
   return {done:n, total:r.length, pct:r.length?Math.round(n/r.length*100):0};
 }
 function barClr(p){ return p>=80?'linear-gradient(90deg,#00e676,#00bcd4)':p>=50?'linear-gradient(90deg,#ffd700,#ff9800)':'linear-gradient(90deg,#ff6d3a,#e91e63)'; }
-function sorted(v){ return members.slice().sort(function(a,b){ var sa=stats(a,v),sb=stats(b,v); return sb.pct-sa.pct||streak(b)-streak(a); }); }
+function sortedMembers(v){
+  return MEMBERS.slice().sort(function(a,b){
+    var sa=getStats(a.name,v), sb=getStats(b.name,v);
+    return sb.pct-sa.pct||calcStreak(b.name)-calcStreak(a.name);
+  });
+}
 
-// ===================== BOARD =====================
+// ============ BOARD ============
 function renderBoard(bid, banid, v, me, admin) {
-  members = loadMembers();
-  var s = sorted(v);
+  var s = sortedMembers(v);
   if(s.length){
-    var top=s[0], ts=stats(top,v);
-    qs(banid).innerHTML='<div style="font-size:1.8rem;">&#x1F3C6;</div><div><strong>TOP: '+top.name+'</strong><span>  '+ts.pct+'% &bull; &#x1F525;'+streak(top)+' days &bull; '+ts.done+'/'+ts.total+'</span></div>';
+    var top=s[0], ts=getStats(top.name,v);
+    qs(banid).innerHTML='<div style="font-size:1.8rem;">&#x1F3C6;</div><div><strong>TOP: '+top.name+'</strong><span style="font-size:.76rem;color:var(--muted);margin-left:8px;">'+ts.pct+'% &bull; &#x1F525;'+calcStreak(top.name)+' days &bull; '+ts.done+'/'+ts.total+'</span></div>';
   }
   var y=yesterday();
   var last7=dateRange((function(){var d=new Date(TODAY);d.setDate(d.getDate()-6);return d.toISOString().split('T')[0];})(),TODAY);
   var rk=['gold','silver','bronze'];
   var re=['&#x1F947;','&#x1F948;','&#x1F949;'];
   qs(bid).innerHTML = s.map(function(m,i){
-    var st=stats(m,v), doneT=done(m,TODAY), rc=rk[i]||'', rem=re[i]||i+1;
+    var st=getStats(m.name,v), doneT=isDone(m.name,TODAY), rc=rk[i]||'', rem=re[i]||i+1;
     var isMe=m.name===me;
-    var dots=last7.map(function(d){return '<div class="dot '+(done(m,d)?'on':'off')+'"></div>';}).join('');
+    var dots=last7.map(function(d){return '<div class="dot '+(isDone(m.name,d)?'on':'off')+'"></div>';}).join('');
     var abts='';
     if(admin){
       abts='<div style="margin-top:8px;">';
-      if(doneT){ abts+='<span style="font-size:.73rem;padding:4px 10px;border-radius:8px;background:rgba(0,230,118,.1);color:var(--green);border:1px solid rgba(0,230,118,.25);font-weight:700;">&#x2705; Done Today</span> '; abts+='<button class="abtn abtn-un" onclick="adminToggle(\''+m.name+'\',\''+TODAY+'\')">&#x2715; Unmark</button>'; }
-      else { abts+='<button class="abtn abtn-do" onclick="adminToggle(\''+m.name+'\',\''+TODAY+'\')">&#x2714; Mark Today</button>'; }
-      if(done(m,y)){ abts+=' <span style="font-size:.73rem;padding:4px 10px;border-radius:8px;background:rgba(0,230,118,.07);color:var(--muted);border:1px solid var(--border);font-weight:600;">&#x2705; Yesterday</span>'; }
-      else{ abts+=' <button class="abtn abtn-ye" onclick="adminToggle(\''+m.name+'\',\''+y+'\')">+ Yesterday</button>'; }
+      if(doneT){
+        abts+='<span style="font-size:.73rem;padding:4px 10px;border-radius:8px;background:rgba(0,230,118,.1);color:var(--green);border:1px solid rgba(0,230,118,.25);font-weight:700;">&#x2705; Done Today</span> ';
+        abts+='<button class="abtn abtn-un" onclick="adminToggle(\''+m.name+'\',\''+TODAY+'\',true)">&#x2715; Unmark</button>';
+      } else {
+        abts+='<button class="abtn abtn-do" onclick="adminToggle(\''+m.name+'\',\''+TODAY+'\',false)">&#x2714; Mark Today</button>';
+      }
+      if(isDone(m.name,y)){
+        abts+=' <span style="font-size:.73rem;padding:4px 10px;border-radius:8px;color:var(--muted);border:1px solid var(--border);font-weight:600;">&#x2705; Yesterday</span>';
+      } else {
+        abts+=' <button class="abtn abtn-ye" onclick="adminToggle(\''+m.name+'\',\''+y+'\',false)">+ Yesterday</button>';
+      }
       abts+='</div>';
     }
     return '<div class="mcard'+(rc?' '+rc:'')+'"'+(isMe?' style="border-color:var(--accent);"':'')+'>'+
       '<div class="mc-top"><div class="mc-rank '+rc+'">'+rem+'</div>'+
       '<div class="mc-name">'+m.name+(isMe?' <small style="color:var(--accent);">(you)</small>':'')+'</div>'+
       '<div class="mc-pct">'+st.pct+'%</div></div>'+
-      '<div class="pbar-lbl"><span>'+st.done+'/'+st.total+' days</span><span>&#x1F525; '+streak(m)+'</span></div>'+
+      '<div class="pbar-lbl"><span>'+st.done+'/'+st.total+' days</span><span>&#x1F525; '+calcStreak(m.name)+'</span></div>'+
       '<div class="pbar"><div class="pbar-fill" style="width:0%;background:'+barClr(st.pct)+'" data-p="'+st.pct+'"></div></div>'+
       '<div class="mc-meta"><span class="'+(doneT?'bdone':'bmiss')+'">'+(doneT?'&#x2705; Done':'&#x25FB; Pending')+'</span>'+
-      '<span style="font-size:.7rem;color:var(--muted);">Total: '+total(m)+'</span>'+
+      '<span style="font-size:.7rem;color:var(--muted);">Total: '+totalDone(m.name)+'</span>'+
       '<div class="dots">'+dots+'</div></div>'+abts+'</div>';
   }).join('');
   setTimeout(function(){
@@ -481,17 +480,15 @@ function renderBoard(bid, banid, v, me, admin) {
   },60);
 }
 
-// ===================== MEMBER SCREEN =====================
-function renderMember(){
-  members = loadMembers();
+// ============ MEMBER SCREEN ============
+function renderMember() {
   var m = curMember;
-  var fresh = members.find(function(x){return x.name===m.name;});
-  if(fresh) curMember = m = fresh;
   qs('mName').textContent = m.name;
-  qs('mStreak').innerHTML = '&#x1F525; '+streak(m)+' streak';
+  qs('mStreak').innerHTML = '&#x1F525; '+calcStreak(m.name)+' streak';
   var day = Math.max(1, dateRange(START,TODAY).length);
   qs('chTag').textContent = 'DAY '+day+' \u00B7 LEAP CHALLENGE';
-  var doneToday = done(m,TODAY), doneYest = done(m,yesterday());
+  var doneToday = isDone(m.name,TODAY);
+  var doneYest = isDone(m.name,yesterday());
   var yLbl = new Date(yesterday()).toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'});
   var h = '';
   if(doneToday){ h += '<div class="done-box">&#x1F389; Challenge complete! Keep the streak!</div>'; }
@@ -501,168 +498,161 @@ function renderMember(){
   else { h += '<button class="yest-btn" id="btnMarkY">+ Mark Yesterday</button>'; }
   h += '</div>';
   qs('chDone').innerHTML = h;
-  var bt = qs('btnMarkT'); if(bt) bt.onclick = function(){ markDay(TODAY); };
-  var by = qs('btnMarkY'); if(by) by.onclick = function(){ markDay(yesterday()); };
+  var bt=qs('btnMarkT'); if(bt) bt.onclick=function(){ markDay(TODAY); };
+  var by=qs('btnMarkY'); if(by) by.onclick=function(){ markDay(yesterday()); };
   renderBoard('mBoard','mTopBanner',mView,m.name,false);
 }
 
-function markDay(d){
-  members = loadMembers();
-  var m = members.find(function(x){return x.name===curMember.name;});
-  if(!m) return;
-  if(done(m,d)){ toast('Already marked!'); return; }
-  if(!m.logs) m.logs=[];
-  m.logs.push({date:d,done:true});
-  saveMembers(members);
-  curMember = m;
-  toast(d!==TODAY?'&#x2705; Yesterday marked!':'&#x1F389; Done! Great work!');
-  renderMember();
+function markDay(d) {
+  if(isDone(curMember.name,d)){ toast('Already marked!'); return; }
+  upsertLog(curMember.name, d, true).then(function(){
+    toast(d!==TODAY?'&#x2705; Yesterday marked!':'&#x1F389; Done! Great work!');
+    renderMember();
+  });
 }
 
-// ===================== ADMIN =====================
-function renderAdmin(){
-  members = loadMembers();
-  renderMarkGrid();
-  renderBoard('aBoard','aTopBanner',aView,null,true);
-  renderMemberTable();
+// ============ ADMIN ============
+function renderAdmin() {
+  fetchLogs().then(function(){
+    renderMarkGrid();
+    renderBoard('aBoard','aTopBanner',aView,null,true);
+    renderMemberTable();
+  });
 }
 
-function renderMarkGrid(){
-  members = loadMembers();
+function renderMarkGrid() {
   var d = mDate==='yesterday'?yesterday():TODAY;
-  qs('mGrid').innerHTML = members.map(function(m){
-    var isDone=done(m,d);
-    var init=m.name.slice(0,2).toUpperCase();
-    return '<div class="mgtile'+(isDone?' done':'')+'" onclick="qToggle(\''+m.name+'\',\''+d+'\')">'+
-      '<div class="mgtile-av">'+(isDone?'&#x2705;':init)+'</div>'+
+  qs('mGrid').innerHTML = MEMBERS.map(function(m){
+    var dn=isDone(m.name,d);
+    return '<div class="mgtile'+(dn?' done':'')+'" onclick="qToggle(\''+m.name+'\',\''+d+'\','+dn+')">'+
+      '<div class="mgtile-av">'+(dn?'&#x2705;':m.name.slice(0,2))+'</div>'+
       '<div class="mgtile-name">'+m.name+'</div>'+
-      '<div class="mgtile-st">'+(isDone?'&#x2705; DONE':'&#x25FB; PENDING')+'</div>'+
+      '<div class="mgtile-st">'+(dn?'&#x2705; DONE':'&#x25FB; PENDING')+'</div>'+
       '</div>';
   }).join('');
 }
 
-function qToggle(name,d){
-  members = loadMembers();
-  var m = members.find(function(x){return x.name===name;});
-  if(!m) return;
-  if(done(m,d)){ m.logs=m.logs.filter(function(l){return!(l.date===d&&l.done);}); toast('&#x274C; '+name+' unmarked'); }
-  else{ if(!m.logs)m.logs=[]; m.logs.push({date:d,done:true}); toast('&#x2705; '+name+' marked!'); }
-  saveMembers(members);
-  renderMarkGrid();
-  renderBoard('aBoard','aTopBanner',aView,null,true);
+function qToggle(name, d, alreadyDone) {
+  if(alreadyDone){
+    deleteLog(name, d).then(function(){
+      toast('&#x274C; '+name+' unmarked');
+      renderMarkGrid();
+      renderBoard('aBoard','aTopBanner',aView,null,true);
+    });
+  } else {
+    upsertLog(name, d, true).then(function(){
+      toast('&#x2705; '+name+' marked!');
+      renderMarkGrid();
+      renderBoard('aBoard','aTopBanner',aView,null,true);
+    });
+  }
 }
 
-function adminToggle(name,d){
-  qToggle(name,d);
+function adminToggle(name, d, alreadyDone) {
+  if(alreadyDone){
+    deleteLog(name,d).then(function(){
+      toast('&#x274C; '+name+' unmarked');
+      renderBoard('aBoard','aTopBanner',aView,null,true);
+      renderMarkGrid();
+    });
+  } else {
+    upsertLog(name,d,true).then(function(){
+      toast('&#x2705; '+name+' marked!');
+      renderBoard('aBoard','aTopBanner',aView,null,true);
+      renderMarkGrid();
+    });
+  }
 }
 
-function renderMemberTable(){
-  members = loadMembers();
-  qs('mTblBody').innerHTML = members.map(function(m,i){
-    return '<tr><td>'+(i+1)+'</td><td>'+m.name+'</td><td><code style="color:var(--accent);">'+m.pin+'</code></td><td>&#x1F525; '+streak(m)+'</td><td>'+total(m)+'</td>'+
-      '<td><button onclick="removeMember('+i+')" style="background:none;border:none;color:var(--orange);cursor:pointer;font-size:.8rem;">Remove</button></td></tr>';
+function renderMemberTable() {
+  qs('mTblBody').innerHTML = MEMBERS.map(function(m,i){
+    return '<tr><td>'+(i+1)+'</td><td>'+m.name+'</td><td><code style="color:var(--accent);">'+m.pin+'</code></td><td>&#x1F525; '+calcStreak(m.name)+'</td><td>'+totalDone(m.name)+'</td></tr>';
   }).join('');
 }
 
-function removeMember(i){
-  members = loadMembers();
-  if(!confirm('Remove '+members[i].name+'?')) return;
-  members.splice(i,1);
-  saveMembers(members);
-  renderAdmin();
-  toast('Removed');
-}
-
-function renderStats(){
-  members = loadMembers();
+function renderStats() {
   var views=['daily','weekly','monthly','overall'];
   var lbls={daily:'Today',weekly:'This Week',monthly:'This Month',overall:'All Time'};
   qs('statsDiv').innerHTML = views.map(function(v){
-    var s=sorted(v), top=s[0], ts=top?stats(top,v):{pct:0};
-    var avg=Math.round(members.reduce(function(a,m){return a+stats(m,v).pct;},0)/Math.max(1,members.length));
-    var dt=members.filter(function(m){return done(m,TODAY);}).length;
+    var s=sortedMembers(v), top=s[0], ts=top?getStats(top.name,v):{pct:0};
+    var avg=Math.round(MEMBERS.reduce(function(a,m){return a+getStats(m.name,v).pct;},0)/Math.max(1,MEMBERS.length));
+    var dt=MEMBERS.filter(function(m){return isDone(m.name,TODAY);}).length;
     return '<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px;">'+
       '<div style="font-family:Bebas Neue,sans-serif;font-size:.95rem;letter-spacing:1px;color:var(--muted);margin-bottom:10px;">'+lbls[v]+' SUMMARY</div>'+
       '<div style="display:flex;gap:10px;flex-wrap:wrap;">'+
       '<div style="flex:1;min-width:90px;background:var(--surface);border-radius:10px;padding:10px;text-align:center;"><div style="font-family:Bebas Neue,sans-serif;font-size:1.6rem;color:var(--accent);">'+avg+'%</div><div style="font-size:.68rem;color:var(--muted);">Avg</div></div>'+
-      '<div style="flex:1;min-width:90px;background:var(--surface);border-radius:10px;padding:10px;text-align:center;"><div style="font-family:Bebas Neue,sans-serif;font-size:1.2rem;color:var(--gold);">'+(top?top.name:'-')+'</div><div style="font-size:.68rem;color:var(--muted);">Leader ('+ts.pct+'%)</div></div>'+
-      '<div style="flex:1;min-width:90px;background:var(--surface);border-radius:10px;padding:10px;text-align:center;"><div style="font-family:Bebas Neue,sans-serif;font-size:1.6rem;color:var(--green);">'+dt+'/'+members.length+'</div><div style="font-size:.68rem;color:var(--muted);">Done Today</div></div>'+
+      '<div style="flex:1;min-width:90px;background:var(--surface);border-radius:10px;padding:10px;text-align:center;"><div style="font-family:Bebas Neue,sans-serif;font-size:1.1rem;color:var(--gold);">'+(top?top.name:'-')+'</div><div style="font-size:.68rem;color:var(--muted);">Leader ('+ts.pct+'%)</div></div>'+
+      '<div style="flex:1;min-width:90px;background:var(--surface);border-radius:10px;padding:10px;text-align:center;"><div style="font-family:Bebas Neue,sans-serif;font-size:1.6rem;color:var(--green);">'+dt+'/'+MEMBERS.length+'</div><div style="font-size:.68rem;color:var(--muted);">Done Today</div></div>'+
       '</div></div>';
   }).join('');
 }
 
-// ===================== CHART =====================
+// ============ CHART ============
 function renderShareCard(v){
-  members = loadMembers();
-  var s=sorted(v);
+  var s=sortedMembers(v);
   var lbls={daily:'Today',weekly:'This Week',monthly:'This Month',overall:'All Time'};
-  var avg=Math.round(members.reduce(function(a,m){return a+stats(m,v).pct;},0)/Math.max(1,members.length));
-  var ms=Math.max.apply(null,members.map(function(m){return streak(m);}));
-  var dt=members.filter(function(m){return done(m,TODAY);}).length;
+  var avg=Math.round(MEMBERS.reduce(function(a,m){return a+getStats(m.name,v).pct;},0)/Math.max(1,MEMBERS.length));
+  var ms=Math.max.apply(null,MEMBERS.map(function(m){return calcStreak(m.name);}));
+  var dt=MEMBERS.filter(function(m){return isDone(m.name,TODAY);}).length;
   var top=s[0];
   var rows=s.map(function(m,i){
-    var st=stats(m,v), c=COLORS[i%COLORS.length];
+    var st=getStats(m.name,v), c=COLORS[i%COLORS.length];
     var rc=i===0?'r0':i===1?'r1':i===2?'r2':'';
     var re=i===0?'&#x1F947;':i===1?'&#x1F948;':i===2?'&#x1F949;':'';
     return '<div class="smrow"><div class="smrank '+rc+'">'+(re||i+1)+'</div><div class="smname">'+m.name+'</div><div class="smpct" style="color:'+c+'">'+st.pct+'%</div></div>'+
       '<div class="sm-track"><div class="sm-fill" style="width:'+st.pct+'%;background:'+c+';"></div></div>'+
-      '<div class="sm-meta">'+st.done+'/'+st.total+' days &bull; &#x1F525;'+streak(m)+'</div>';
+      '<div class="sm-meta">'+st.done+'/'+st.total+' days &bull; &#x1F525;'+calcStreak(m.name)+'</div>';
   }).join('');
   qs('scardWrap').innerHTML='<div class="scard" id="scardInner">'+
-    '<div class="scard-hdr"><div class="scard-brand">&#x1F3C3; LEAP</div><div class="scard-sub">DAILY EXERCISE CHALLENGE &bull; EVERY FRIDAY 7:30 AM</div><div class="scard-date">'+lbls[v]+' &bull; '+new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'})+'</div></div>'+
+    '<div class="scard-hdr"><div class="scard-brand">&#x1F3C3; LEAP</div>'+
+    '<div style="font-size:.7rem;opacity:.85;letter-spacing:1px;margin-top:2px;">DAILY EXERCISE CHALLENGE &bull; EVERY FRIDAY 7:30 AM</div>'+
+    '<div style="font-size:.68rem;opacity:.75;margin-top:5px;">'+lbls[v]+' &bull; '+new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'})+'</div></div>'+
     '<div class="scard-body"><div class="scard-lbl">'+lbls[v]+' LEADERBOARD</div>'+rows+'</div>'+
     '<div class="scard-foot">'+
-    '<div><div class="sstat-val">'+dt+'/'+members.length+'</div><div class="sstat-lbl">Done Today</div></div>'+
+    '<div><div class="sstat-val">'+dt+'/'+MEMBERS.length+'</div><div class="sstat-lbl">Done Today</div></div>'+
     '<div><div class="sstat-val">'+avg+'%</div><div class="sstat-lbl">Avg</div></div>'+
     '<div><div class="sstat-val">'+ms+'d</div><div class="sstat-lbl">Top Streak</div></div>'+
-    '<div><div class="sstat-val" style="font-size:.9rem;">'+(top?top.name:'-')+'</div><div class="sstat-lbl">Leader</div></div>'+
+    '<div><div class="sstat-val" style="font-size:.85rem;">'+(top?top.name:'-')+'</div><div class="sstat-lbl">Leader</div></div>'+
     '</div><div class="scard-wm">Generated by LEAP Challenge Tracker</div></div>';
 }
 
 function shareWA(v){
-  members = loadMembers();
-  var s=sorted(v);
+  var s=sortedMembers(v);
   var lbls={daily:'Today',weekly:'This Week',monthly:'This Month',overall:'All Time'};
   var top=s[0];
-  var avg=Math.round(members.reduce(function(a,m){return a+stats(m,v).pct;},0)/Math.max(1,members.length));
-  var dt=members.filter(function(m){return done(m,TODAY);}).length;
+  var avg=Math.round(MEMBERS.reduce(function(a,m){return a+getStats(m.name,v).pct;},0)/Math.max(1,MEMBERS.length));
+  var dt=MEMBERS.filter(function(m){return isDone(m.name,TODAY);}).length;
   var txt='🏃 *LEAP Community Challenge*\n'+new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'})+'\n⏰ Every Friday 7:30 AM\n\n*'+lbls[v]+' Leaderboard:*\n';
   s.forEach(function(m,i){
-    var st=stats(m,v);
+    var st=getStats(m.name,v);
     var md=i===0?'🥇':i===1?'🥈':i===2?'🥉':'▫️';
     var bar='█'.repeat(Math.round(st.pct/10))+'░'.repeat(10-Math.round(st.pct/10));
-    txt+=md+' '+m.name+': '+bar+' '+st.pct+'% 🔥'+streak(m)+'\n';
+    txt+=md+' '+m.name+': '+bar+' '+st.pct+'% 🔥'+calcStreak(m.name)+'\n';
   });
-  txt+='\n📊 Community: '+dt+'/'+members.length+' done | Avg: '+avg+'%\n';
+  txt+='\n📊 '+dt+'/'+MEMBERS.length+' done today | Avg: '+avg+'%\n';
   if(top) txt+='🏆 Leader: *'+top.name+'*\n💪 #LEAP #FitnessChallenge';
   window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
 }
 
-// ===================== WIRE BUTTONS =====================
+// ============ INIT ============
 window.onload = function(){
-
   qs('hdDate').textContent = new Date().toLocaleDateString('en-IN',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+
+  // Load logs on start
+  fetchLogs();
 
   // LOGIN
   qs('btnGo').onclick = function(){
-    members = loadMembers();
     var name = qs('inName').value.trim().toUpperCase();
     var pin  = qs('inPin').value.trim();
     var err  = qs('loginErr');
     if(!name||!pin){ err.innerHTML='Enter name and PIN.'; err.style.display='block'; return; }
-    var m=null;
-    for(var i=0;i<members.length;i++){
-      if(members[i].name.toUpperCase()===name && members[i].pin===pin){ m=members[i]; break; }
-    }
-    if(!m){
-      var names=members.map(function(x){return x.name;}).join(', ');
-      err.innerHTML='Name or PIN wrong. <small>('+names+')</small>';
-      err.style.display='block'; return;
-    }
+    var m = MEMBERS.find(function(x){ return x.name===name && x.pin===pin; });
+    if(!m){ err.innerHTML='Name or PIN incorrect.'; err.style.display='block'; return; }
     err.style.display='none';
-    curMember=m; show('sMember'); renderMember();
+    curMember = m;
+    fetchLogs().then(function(){ show('sMember'); renderMember(); });
   };
-
   qs('inPin').onkeydown = function(e){ if(e.key==='Enter') qs('btnGo').click(); };
   qs('inName').onkeydown = function(e){ if(e.key==='Enter') qs('inPin').focus(); };
 
@@ -679,7 +669,12 @@ window.onload = function(){
   qs('btnMLogout').onclick = function(){ curMember=null; qs('inName').value=''; qs('inPin').value=''; show('sLogin'); };
 
   // PUBLIC
-  qs('btnPublicView').onclick = function(){ members=loadMembers(); renderBoard('pubBoard','pubTopBanner','overall',null,false); show('sPublic'); };
+  qs('btnPublicView').onclick = function(){
+    fetchLogs().then(function(){
+      renderBoard('pubBoard','pubTopBanner','overall',null,false);
+      show('sPublic');
+    });
+  };
   qs('btnPubBack').onclick = function(){ show('sLogin'); };
   qs('btnPubWA').onclick = function(){ shareWA('overall'); };
 
@@ -690,7 +685,7 @@ window.onload = function(){
     b.classList.add('on'); mView=b.dataset.v;
     var tl={daily:"TODAY'S",weekly:"THIS WEEK'S",monthly:"THIS MONTH'S",overall:"ALL-TIME"};
     qs('mBoardTitle').textContent=tl[mView]+' LEADERBOARD';
-    renderBoard('mBoard','mTopBanner',mView,curMember?curMember.name:null,false);
+    fetchLogs().then(function(){ renderBoard('mBoard','mTopBanner',mView,curMember?curMember.name:null,false); });
   };
 
   // ADMIN VTABS
@@ -698,7 +693,7 @@ window.onload = function(){
     var b=e.target.closest('.vtab'); if(!b) return;
     qs('aVtabs').querySelectorAll('.vtab').forEach(function(t){t.classList.remove('on');});
     b.classList.add('on'); aView=b.dataset.v;
-    renderBoard('aBoard','aTopBanner',aView,null,true);
+    fetchLogs().then(function(){ renderBoard('aBoard','aTopBanner',aView,null,true); });
   };
 
   // ADMIN TOP TABS
@@ -707,34 +702,39 @@ window.onload = function(){
     qs('aTabs').querySelectorAll('.atab').forEach(function(t){t.classList.remove('on');});
     document.querySelectorAll('.apanel').forEach(function(p){p.classList.remove('on');});
     b.classList.add('on'); qs(b.dataset.t).classList.add('on');
-    if(b.dataset.t==='aStats') renderStats();
+    if(b.dataset.t==='aStats'){ fetchLogs().then(function(){ renderStats(); }); }
   };
 
   // MARK DATE TOGGLE
   qs('mdToggle').onclick = function(e){
     var b=e.target.closest('.mdtbtn'); if(!b) return;
     qs('mdToggle').querySelectorAll('.mdtbtn').forEach(function(t){t.classList.remove('on');});
-    b.classList.add('on'); mDate=b.dataset.d; renderMarkGrid();
+    b.classList.add('on'); mDate=b.dataset.d;
+    fetchLogs().then(function(){ renderMarkGrid(); });
   };
 
-  // ADD MEMBER
+  // ADD MEMBER (local only)
   qs('btnAddM').onclick = function(){
-    members=loadMembers();
     var name=qs('nName').value.trim().toUpperCase();
     var pin=qs('nPin').value.trim();
     var err=qs('addErr');
-    if(!name||pin.length!==4||!/^\d{4}$/.test(pin)||members.find(function(m){return m.name===name;})){
+    if(!name||pin.length!==4||!/^\d{4}$/.test(pin)||MEMBERS.find(function(m){return m.name===name;})){
       err.style.display='block'; return;
     }
     err.style.display='none';
-    members.push({name:name,pin:pin,logs:[]});
-    saveMembers(members);
+    MEMBERS.push({name:name,pin:pin});
     qs('nName').value=''; qs('nPin').value='';
-    renderAdmin(); toast(name+' added!');
+    renderMemberTable();
+    toast(name+' added!');
   };
 
   // CHART
-  qs('btnChart').onclick = function(){ cView=mView; qs('cvTabs').querySelectorAll('.cvtab').forEach(function(t){t.classList.toggle('on',t.dataset.v===cView);}); renderShareCard(cView); qs('chartModal').classList.add('on'); };
+  qs('btnChart').onclick = function(){
+    cView=mView;
+    qs('cvTabs').querySelectorAll('.cvtab').forEach(function(t){t.classList.toggle('on',t.dataset.v===cView);});
+    renderShareCard(cView);
+    qs('chartModal').classList.add('on');
+  };
   qs('btnChartX').onclick = function(){ qs('chartModal').classList.remove('on'); };
   qs('btnChartClose').onclick = function(){ qs('chartModal').classList.remove('on'); };
   qs('chartModal').onclick = function(e){ if(e.target===this) qs('chartModal').classList.remove('on'); };
@@ -746,16 +746,24 @@ window.onload = function(){
   qs('btnChartWA').onclick = function(){ shareWA(cView); };
   qs('btnDL').onclick = function(){
     var card=qs('scardInner');
-    if(!card){toast('No card to save');return;}
+    if(!card){toast('No card');return;}
     html2canvas(card,{scale:2,backgroundColor:'#ffffff',useCORS:true,logging:false}).then(function(canvas){
       var a=document.createElement('a');
-      a.download='LEAP-'+new Date().toISOString().split('T')[0]+'.png';
+      a.download='LEAP-'+TODAY+'.png';
       a.href=canvas.toDataURL('image/png');
       a.click();
-      toast('&#x2B07; Image saved!');
-    }).catch(function(){ toast('Save failed'); });
+      toast('&#x2B07; Saved!');
+    });
   };
   qs('btnWA').onclick = function(){ shareWA(mView); };
+
+  // Auto refresh every 30 seconds
+  setInterval(function(){
+    fetchLogs().then(function(){
+      if(curMember && qs('sMember').classList.contains('on')) renderMember();
+      if(qs('sAdmin').classList.contains('on')){ renderMarkGrid(); renderBoard('aBoard','aTopBanner',aView,null,true); }
+    });
+  }, 30000);
 };
 </script>
 </body>
