@@ -167,6 +167,8 @@ input:focus{border-color:var(--accent);}
       <button class="btn btn-main" id="btnGo">LET'S GO &rarr;</button>
       <button class="btn btn-sub" id="btnPublicView">&#x1F3C6; VIEW ALL-TIME LEADERBOARD</button>
       <button class="btn btn-out" id="btnAdminGo">&#9881; ADMIN LOGIN</button>
+      <button class="btn" id="btnTest" style="background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.3);color:var(--gold);margin-top:4px;font-size:.85rem;">&#x1F9EA; TEST CONNECTION</button>
+      <div id="testResult" style="display:none;padding:10px;border-radius:8px;font-size:.8rem;margin-top:8px;line-height:1.6;"></div>
     </div>
   </div>
 </div>
@@ -655,6 +657,41 @@ window.onload = function(){
   };
   qs('inPin').onkeydown = function(e){ if(e.key==='Enter') qs('btnGo').click(); };
   qs('inName').onkeydown = function(e){ if(e.key==='Enter') qs('inPin').focus(); };
+
+  // TEST CONNECTION BUTTON
+  qs('btnTest').onclick = function(){
+    var res = qs('testResult');
+    res.style.display='block';
+    res.style.background='rgba(255,215,0,.1)';
+    res.style.border='1px solid rgba(255,215,0,.3)';
+    res.style.color='var(--gold)';
+    res.innerHTML='&#x23F3; Testing Supabase connection...';
+    
+    fetch(SB_URL + '/rest/v1/logs?limit=1', {
+      method: 'GET',
+      headers: {
+        'apikey': SB_KEY,
+        'Authorization': 'Bearer ' + SB_KEY
+      }
+    })
+    .then(function(r){
+      res.innerHTML += '<br>Status: ' + r.status + ' ' + r.statusText;
+      return r.text();
+    })
+    .then(function(txt){
+      res.innerHTML += '<br>Response: ' + txt.slice(0,100);
+      res.style.background='rgba(0,230,118,.1)';
+      res.style.border='1px solid rgba(0,230,118,.3)';
+      res.style.color='var(--green)';
+      res.innerHTML += '<br>&#x2705; Connection OK!';
+    })
+    .catch(function(e){
+      res.style.background='rgba(255,109,58,.1)';
+      res.style.border='1px solid rgba(255,109,58,.3)';
+      res.style.color='var(--orange)';
+      res.innerHTML = '&#x274C; Error: ' + e.message;
+    });
+  };
 
   // ADMIN
   qs('btnAdminGo').onclick = function(){ qs('inAdminPw').value=''; qs('adminPwErr').style.display='none'; show('sAdminPw'); };
